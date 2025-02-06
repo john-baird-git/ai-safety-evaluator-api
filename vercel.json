@@ -1,0 +1,12 @@
+```json
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/api/evaluate",
+      "methods": ["POST", "OPTIONS"],
+      "dest": "/api/evaluate.js"
+    }
+  ]
+}
+```

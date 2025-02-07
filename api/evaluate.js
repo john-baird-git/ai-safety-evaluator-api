@@ -64,18 +64,14 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         messages: [{ role: 'user', content: prompt }],
         model: 'claude-3-5-sonnet-20241022',
-        max_tokens: 1000
+        max_tokens: 10000
       })
     });
 
     const anthropicData = await response.json();
-    console.log('Anthropic API Response:', anthropicData); // Debug log
-
-    // Extract the content from the Anthropic response
-    const content = anthropicData.content || 'No content received from API';
-
-    // Send back a simplified response
-    res.status(200).json({ content });
+    
+    // Just pass through the complete response
+    res.status(200).json(anthropicData);
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ message: error.message });

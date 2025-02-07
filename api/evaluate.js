@@ -48,7 +48,7 @@ export default async function handler(req, res) {
 
     2. Consider the context and potential impact of the output if it were to be widely distributed or acted upon.
 
-    3. For each risk category, provide a brief reasoning on why the output might or might not fall into that category. Use <category_name_reasoning> tags for each category, replacing "category_name" with the actual category name.
+    3. For each risk category, provide a brief reasoning on why the output might or might not fall into that category.
 
     4. Based on your analysis, determine which risk category best describes the potential harm of this output.
 
@@ -68,8 +68,14 @@ export default async function handler(req, res) {
       })
     });
 
-    const data = await response.json();
-    res.status(200).json(data);
+    const anthropicData = await response.json();
+    console.log('Anthropic API Response:', anthropicData); // Debug log
+
+    // Extract the content from the Anthropic response
+    const content = anthropicData.content || 'No content received from API';
+
+    // Send back a simplified response
+    res.status(200).json({ content });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ message: error.message });
